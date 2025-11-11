@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>"Motivos para sair comigo hoje"</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      z-index: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .text {
+      font-size: 1.6em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .text strong {
+      color: red;
+    }
+
+    img {
+      max-width: 90vw;
+      max-height: 60vh;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    /* Indicativo "toque na tela" */
+    .tap-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1em;
+      color: #555;
+      animation: blink 1.2s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .text {
+        font-size: 1.2em;
+      }
+
+      button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+      }
+
+      .tap-hint {
+        font-size: 0.9em;
+        bottom: 25px;
+      }
+    }
+  </style>
+</head>
+<body onclick="nextSlide()">
+
+  <div class="slide active">
+    <div class="text">
+      <strong>MOTIVOS</strong> para você aceitar <strong>SAIR COMIGO HOJE</strong>
+    </div>
+    <img src="img1.png" alt="Motivo 1">
+    <div class="tap-hint">👆 Toque na tela</div>
+  </div>
+
+  <div class="slide">
+    <div class="text">
+      Sou <strong>100%</strong> confiável
+    </div>
+    <img src="img2.png" alt="Motivo 2">
+  </div>
+
+  <div class="slide">
+    <div class="text">
+      Eu deixo você <strong>escolher o lugar</strong>
+    </div>
+    <img src="img3.png" alt="Motivo 3">
+  </div>
+
+  <div class="slide">
+    <div class="text">
+      Estamos precisando <strong>sair juntos</strong><br><br><strong>(demais)</strong>
+    </div>
+    <img src="img4.png" alt="Motivo 4">
+  </div>
+
+  <div class="slide">
+    <div class="text">
+      <strong>Esses são os motivos</strong><br><br>
+      <strong style="font-size: 1.4em;">Aceita?</strong>
+    </div>
+    <img src="img5.png" alt="Motivo 5">
+    <div style="margin-top: 20px;">
+      <button onclick="aceitar(event)">Sim!</button>
+      <button onclick="recusar(event)">Ainda não</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    let transitioning = false;
+
+    function nextSlide() {
+      if (transitioning || current >= slides.length - 1) return;
+      transitioning = true;
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+      setTimeout(() => transitioning = false, 800);
+    }
+
+    function aceitar(event) {
+      event.stopPropagation();
+      window.location.href = "https://wa.me/5554992476307?text=Aceitoo%20sim❣";
+    }
+
+    function recusar(event) {
+      event.stopPropagation();
+      alert("Poxa 😢 vou tentar de novo!");
+    }
+  </script>
+
+</body>
+</html>
